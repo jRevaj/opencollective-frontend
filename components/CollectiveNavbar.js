@@ -317,6 +317,12 @@ export const getSectionsForCollective = (collective, isAdmin) => {
     }
   }
 
+  if (collective.settings?.fund) {
+    if (!isAdmin) {
+      toRemove.add(Sections.BUDGET);
+    }
+  }
+
   if (isEvent) {
     // Should not see tickets section if you can't order them
     if ((!hasContribute && !isAdmin) || (!canOrderTicketsFromEvent(collective) && !isAdmin)) {

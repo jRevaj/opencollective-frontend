@@ -20,7 +20,15 @@ const AddFundsModal = dynamic(() => import('./AddFundsModal'));
 const CollectiveCallsToAction = ({
   collective,
   buttonsMinWidth,
-  callsToAction: { hasSubmitExpense, hasContact, hasApply, hasDashboard, hasManageSubscriptions, addFunds },
+  callsToAction: {
+    hasContribute,
+    hasSubmitExpense,
+    hasContact,
+    hasApply,
+    hasDashboard,
+    hasManageSubscriptions,
+    addFunds,
+  },
   ...props
 }) => {
   const [hasAddFundsModal, showAddFundsModal] = React.useState(false);
@@ -39,6 +47,20 @@ const CollectiveCallsToAction = ({
         <Link route="collective-contact" params={{ collectiveSlug: collective.slug }}>
           <StyledButton buttonSize="small" mx={2} my={1} minWidth={buttonsMinWidth}>
             <FormattedMessage id="Contact" defaultMessage="Contact" />
+          </StyledButton>
+        </Link>
+      )}
+      {hasContribute && (
+        <Link route="orderCollectiveNew" params={{ collectiveSlug: collective.slug, verb: 'donate' }}>
+          <StyledButton
+            buttonSize="small"
+            mx={2}
+            my={1}
+            minWidth={buttonsMinWidth}
+            buttonStyle="secondary"
+            data-cy="donate-btn"
+          >
+            <FormattedMessage id="menu.donate" defaultMessage="Donate" />
           </StyledButton>
         </Link>
       )}

@@ -625,6 +625,9 @@ class CreateOrderPage extends React.Component {
   getAmountsPresets() {
     const tier = this.props.tier || {};
     if (tier.amountType !== AmountTypes.FIXED) {
+      if (this.props.collective?.settings?.fund === true) {
+        return tier.presets || [100000, 200000, 500000, 1000000];
+      }
       return tier.presets || [500, 1000, 2000, 5000];
     } else {
       return null;
